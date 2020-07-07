@@ -6,13 +6,18 @@ import { useStatusBarEffect } from '../../navigation';
 import History from './History';
 
 const ExposureHistoryScreen = (): JSX.Element => {
-  const { exposureHistory } = useContext(ExposureHistoryContext);
+  const { exposureHistory, lastExposureDetectionDate } = useContext(
+    ExposureHistoryContext,
+  );
 
   useStatusBarEffect('dark-content');
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <History exposureHistory={exposureHistory} />
+      <History
+        exposureHistory={exposureHistory}
+        lastExposureDetectionDate={lastExposureDetectionDate}
+      />
     </SafeAreaView>
   );
 };

@@ -23,6 +23,13 @@ final class ExposureManager: NSObject {
     let date = Calendar.current.date(byAdding: .hour, value: -Constants.exposureLifetimeHours, to: Date())!
     return rollingStartNumber(date)
   }
+
+  @objc func getLastDetectionDate(callback: @escaping RCTResponseSenderBlock) {
+    let lastDetectionDate = "12-22-2020"
+    // BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset 
+    // let lastDetectionDate = BTSecureStorage.shared.$dateLastPerformedExposureDetection.wrappedValue
+    callback([[lastDetectionDate]])
+  }
   
   enum EnabledState: String {
     case ENABLED, DISABLED

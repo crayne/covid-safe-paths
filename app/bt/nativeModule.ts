@@ -26,6 +26,16 @@ export const subscribeToExposureEvents = (
   );
 };
 
+export const getLastExposureDetectionDate = async (
+  cb: (date: string) => void,
+): Promise<void> => {
+  debugger;
+  NativeModules.ENExposureModule.getLastDetectionDate((date: string) => {
+    console.log('native module ', date);
+    cb(date);
+  });
+};
+
 export const subscribeToEnabledStatusEvents = (
   cb: (status: ENPermissionStatus) => void,
 ): EventSubscription => {

@@ -5,6 +5,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
+import * as BTNativeModule from './bt/nativeModule';
 import {
   blankExposureHistory,
   ExposureHistory,
@@ -13,6 +14,7 @@ import {
 } from './exposureHistory';
 
 interface ExposureHistoryState {
+  lastExposureDetectionDate: string;
   exposureHistory: ExposureHistory;
   hasBeenExposed: boolean;
   userHasNewExposure: boolean;
@@ -21,6 +23,7 @@ interface ExposureHistoryState {
 }
 
 const initialState = {
+  lastExposureDetectionDate: '',
   exposureHistory: [],
   hasBeenExposed: false,
   userHasNewExposure: true,
@@ -69,6 +72,9 @@ const ExposureHistoryProvider: FunctionComponent<ExposureHistoryProps> = ({
     blankHistory,
   );
   const [userHasNewExposure, setUserHasNewExposure] = useState<boolean>(false);
+  const [lastExposureDetectionDate, setLastExposureDetectionDate] = useState(
+    '',
+  );
 
   useEffect(() => {
     const subscription = exposureInfoSubscription(
@@ -77,6 +83,13 @@ const ExposureHistoryProvider: FunctionComponent<ExposureHistoryProps> = ({
           exposureInfo,
           blankHistoryConfig,
         );
+
+        const handleNativeResponse = (detectionDate: string) => {
+          console.log('Detection date: ', detectionDate);
+          setLastExposureDetectionDate(detectionDate);
+        };
+        console.log('in context');
+        BTNativeModule.getLastExposureDetectionDate(handleNativeResponse);
         setExposureHistory(exposureHistory);
       },
     );
@@ -96,6 +109,7 @@ const ExposureHistoryProvider: FunctionComponent<ExposureHistoryProps> = ({
   return (
     <ExposureHistoryContext.Provider
       value={{
+        lastExposureDetectionDate,
         exposureHistory,
         hasBeenExposed,
         userHasNewExposure,

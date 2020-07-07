@@ -29,9 +29,13 @@ import dayjs from 'dayjs';
 
 interface HistoryProps {
   exposureHistory: ExposureHistory;
+  lastExposureDetectionDate: string;
 }
 
-const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
+const History = ({
+  exposureHistory,
+  lastExposureDetectionDate,
+}: HistoryProps): JSX.Element => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const [selectedDatum, setSelectedDatum] = useState<ExposureDatum | null>(
@@ -57,6 +61,10 @@ const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
 
   const showExposureDetail =
     selectedDatum && !DateTimeUtils.isInFuture(selectedDatum.date);
+  console.log('History page ', lastExposureDetectionDate);
+  const updatedHoursAgo = lastExposureDetectionDate;
+  const updatedAtText =
+    updatedHoursAgo && ` • Updated ${updatedHoursAgo} hours ago`;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -76,7 +84,10 @@ const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
           <View style={styles.headerRow}>
             {!isGPS ? (
               <Typography style={styles.subHeaderText}>
-                {lastDaysText}
+                <>
+                  {lastDaysText}
+                  {updatedAtText}
+                </>
               </Typography>
             ) : null}
           </View>
