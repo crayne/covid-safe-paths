@@ -8,7 +8,6 @@ import {
   Text,
 } from 'react-native';
 
-import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
 import { Typography } from '../../components/Typography';
 import { NavigationProp } from '../../navigation';
 
@@ -69,26 +68,18 @@ export const ENLocalDiagnosisKeyScreen = ({
     });
   };
 
-  const backToDebugMenu = () => {
-    navigation.goBack();
-  };
-
   return (
-    <NavigationBarWrapper
-      title={'Local Diagnosis Keys'}
-      onBackPress={backToDebugMenu}>
-      <FlatList
-        data={diagnosisKeys}
-        keyExtractor={(item) => item.rollingStartNumber.toString()}
-        renderItem={(item) => (
-          <View style={styles.flatlistRowView}>
-            <Typography style={styles.item} use={'body3'}>
-              <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
-            </Typography>
-          </View>
-        )}
-      />
-    </NavigationBarWrapper>
+    <FlatList
+      data={diagnosisKeys}
+      keyExtractor={(item) => item.rollingStartNumber.toString()}
+      renderItem={(item) => (
+        <View style={styles.flatlistRowView}>
+          <Typography style={styles.item} use={'body3'}>
+            <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
+          </Typography>
+        </View>
+      )}
+    />
   );
 };
 
@@ -107,3 +98,4 @@ const styles = StyleSheet.create({
     maxWidth: '90%',
   },
 });
+

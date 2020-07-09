@@ -45,7 +45,7 @@ const PublishConsent = (): JSX.Element => {
   };
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Settings);
+    navigation.navigate(Screens.More);
   };
 
   const title = StrategyCopy.exportPublishTitle;

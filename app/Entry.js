@@ -12,7 +12,7 @@ import {
 } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
-import SettingsScreen from './views/Settings';
+import MoreScreen from './views/More';
 import AboutScreen from './views/About';
 import PartnersOverviewScreen from './views/Partners/PartnersOverview';
 import PartnersEditScreen from './views/Partners/PartnersEdit';
@@ -26,9 +26,9 @@ import ExposureHistoryScreen from './views/ExposureHistory';
 import Assessment from './views/assessment';
 import NextSteps from './views/ExposureHistory/NextSteps';
 import MoreInfo from './views/ExposureHistory/MoreInfo';
-import ENDebugMenu from './views/Settings/ENDebugMenu';
-import ImportFromUrl from './views/Settings/ImportFromUrl';
-import { ENLocalDiagnosisKeyScreen } from './views/Settings/ENLocalDiagnosisKeyScreen';
+import ENDebugMenu from './views/More/ENDebugMenu';
+import ImportFromUrl from './views/More/ImportFromUrl';
+import { ENLocalDiagnosisKeyScreen } from './views/More/ENLocalDiagnosisKeyScreen';
 import { FeatureFlagsScreen } from './views/FeatureFlagToggles';
 import ImportScreen from './views/Import';
 import { EnableExposureNotifications } from './views/onboarding/EnableExposureNotifications';
@@ -101,9 +101,21 @@ const SelfAssessmentStack = () => (
   </Stack.Navigator>
 );
 
+const moreTabScreenOptions = {
+  headerStyle: {
+    backgroundColor: Colors.primaryViolet,
+  },
+  headerTitleStyle: {
+    color: Colors.white,
+    textTransform: 'uppercase',
+  },
+  headerBackTitleVisible: false,
+  headerTintColor: Colors.white,
+};
+
 const MoreTabStack = () => (
-  <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
-    <Stack.Screen name={Screens.Settings} component={SettingsScreen} />
+  <Stack.Navigator screenOptions={moreTabScreenOptions}>
+    <Stack.Screen name={Screens.More} component={MoreScreen} />
     <Stack.Screen name={Screens.About} component={AboutScreen} />
     <Stack.Screen name={Screens.Licenses} component={LicensesScreen} />
     <Stack.Screen name={Screens.FeatureFlags} component={FeatureFlagsScreen} />
@@ -115,7 +127,11 @@ const MoreTabStack = () => (
       component={ENLocalDiagnosisKeyScreen}
     />
     {isGPS ? (
-      <Stack.Screen name={Screens.ExportLocally} component={ExportLocally} />
+      <Stack.Screen
+        name={Screens.ExportLocally}
+        component={ExportLocally}
+        options={{}}
+      />
     ) : null}
   </Stack.Navigator>
 );
