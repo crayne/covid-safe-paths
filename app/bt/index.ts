@@ -20,6 +20,7 @@ const btStrategy: TracingStrategy = {
   affectedUserFlow: AffectedUserFlow,
   assets: btAssets,
   useCopy: useBTCopyContent,
+  extraMiddleware: [],
 };
 
 export { BTNativeModule };

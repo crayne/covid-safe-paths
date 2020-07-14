@@ -23,6 +23,7 @@ export default Factory.define<TracingStrategy>(() => ({
   affectedUserFlow: AffectedUserFlow,
   assets: testStrategyAssets,
   useCopy: () => testStrategyCopy,
+  extraMiddleware: [],
 }));
 
 const PermissionsProvider = ({
